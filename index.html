@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sorry na 🥺💗</title>
+<style>
+*{box-sizing:border-box}
+:root{--pink:#f06f9d;--deep:#9b648d;--ink:#6c4d67}
+body{
+ margin:0;min-height:100vh;padding:22px;display:flex;align-items:center;justify-content:center;
+ font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);overflow-x:hidden;
+ background:radial-gradient(circle at 15% 15%,#fff5fb 0,transparent 30%),
+ linear-gradient(135deg,#ffd6e7,#e6d8ff 55%,#d9f1ff);
+}
+.sparkles{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.sparkles span{position:absolute;bottom:-40px;animation:floatUp linear forwards;opacity:.85}
+@keyframes floatUp{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}
+.card{
+ position:relative;width:min(100%,440px);padding:28px 22px 24px;text-align:center;
+ border:2px solid #ffffffd9;border-radius:30px;background:#ffffffd9;
+ box-shadow:0 18px 55px #a979ad35;backdrop-filter:blur(8px);animation:enter .8s ease;
+}
+@keyframes enter{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.sticker{font-size:52px;line-height:1.2;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.1)}}
+h1{font-size:clamp(25px,7vw,32px);margin:14px 0 8px;color:#dc5689}
+.sub{margin:0 0 18px;color:#a2769a}
+.note{font-size:14px;line-height:1.8;color:#765a70;background:#fff0f6;border:1px dashed #f4b8d0;border-radius:20px;padding:17px;margin-top:20px}
+.buttons{display:flex;align-items:center;justify-content:center;gap:13px;flex-wrap:wrap;margin:22px auto 6px;min-height:48px}
+button,.song-link{font:inherit;font-weight:700;border:0;border-radius:999px;padding:13px 22px;cursor:pointer;text-decoration:none;transition:transform .18s,box-shadow .18s}
+button:hover,.song-link:hover{transform:translateY(-2px);box-shadow:0 7px 18px #d58bab35}
+#yes{color:white;background:linear-gradient(135deg,#f47ca5,#e85f91)}
+#no{color:#806788;background:#eee3f6}
+#result{display:none;margin-top:20px;animation:enter .6s ease}
+#result h2{font-size:23px;color:#df5c91;margin:0 0 8px}
+#result p{line-height:1.7;margin:8px 0}
+.songbox{margin-top:16px;padding:15px;border-radius:18px;background:#f5edff}
+.song-link{display:inline-block;margin-top:8px;color:#fff;background:#8d6bc0;font-size:14px}
+.hint{font-size:12px;color:#a783a1;margin-top:18px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="sparkles" id="sparkles"></div>
+<main class="card">
+  <div class="sticker" id="sticker">🥺💗</div>
+  <h1 id="heading">Will you forgive me?</h1>
+  <p class="sub" id="subtitle">please, baby? ♡</p>
+
+  <div class="buttons" id="buttons">
+    <button id="yes" type="button">Yes 💗</button>
+    <button id="no" type="button">No 🙈</button>
+  </div>
+
+  <section id="result" aria-live="polite">
+    <h2>thank you, baby 🥹💗</h2>
+    <div class="note">
+      thank you for forgiving me po. i'm sorry for hurting you, even when i didn't mean to baby, promise I'll be more careful to my actions and words po hehe
+      <br><br>
+      i want to do better, speak more gently, and love you more carefully. thank you, baby for staying, for listening, and for giving me another chance, mwa!&lt;3
+    </div>
+    <p>i'll do my best to be better for us. mwa! ♡</p>
+    <div class="songbox">
+      <div>🎶 a song for you</div>
+      <strong>I Wanna Be Yours</strong>
+      <br>
+      <a class="song-link" href="https://www.youtube.com/results?search_query=Arctic+Monkeys+I+Wanna+Be+Yours+official" target="_blank" rel="noopener noreferrer">Play the song ♡</a>
+      <p class="hint">Tap to open the song on YouTube.</p>
+    </div>
+  </section>
+  <p class="hint" id="hint">made with love, just for you ♡</p>
+</main>
+<script>
+const noBtn=document.getElementById('no');
+const yesBtn=document.getElementById('yes');
+const buttons=document.getElementById('buttons');
+const result=document.getElementById('result');
+const sparkles=document.getElementById('sparkles');
+let noMoves=0;
+function moveNo(){
+  noMoves++;
+  const maxX=Math.min(window.innerWidth*.32,125);
+  const maxY=Math.min(window.innerHeight*.16,85);
+  const x=(Math.random()*2-1)*maxX;
+  const y=(Math.random()*2-1)*maxY;
+  noBtn.style.transform=`translate(${x}px,${y}px) rotate(${Math.random()*12-6}deg)`;
+  noBtn.textContent=noMoves%3===0?'are you sure? 🥺':'No 🙈';
+}
+noBtn.addEventListener('pointerenter',moveNo);
+noBtn.addEventListener('click',moveNo);
+yesBtn.addEventListener('click',()=>{
+  document.getElementById('heading').textContent='you forgave me! 🥹';
+  document.getElementById('subtitle').textContent='thank you for giving me another chance ♡';
+  document.getElementById('sticker').textContent='💗🧸💗';
+  buttons.classList.add('hidden');
+  result.style.display='block';
+  document.getElementById('hint').textContent='sending you the biggest hug ♡';
+  for(let i=0;i<34;i++)setTimeout(makeHeart,i*90);
+});
+function makeHeart(){
+  const s=document.createElement('span');
+  s.textContent=['💗','💕','💖','♡','✨'][Math.floor(Math.random()*5)];
+  s.style.left=Math.random()*100+'%';
+  s.style.fontSize=(17+Math.random()*20)+'px';
+  s.style.animationDuration=(3+Math.random()*3)+'s';
+  sparkles.appendChild(s);
+  setTimeout(()=>s.remove(),6500);
+}
+setInterval(()=>{if(Math.random()>.35)makeHeart()},900);
+</script>
+</body>
+</html>
